@@ -17,7 +17,12 @@ from Config import *
 # ---------------------------------------------------------------------------
 
 def esc(s):
-    return html.escape(str(s)) if s is not None else "?"
+    if s is None:
+        return "?"
+    s = str(s)
+    # Strip XML-invalid control characters (causes Graphviz parse errors)
+    s = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]', '', s)
+    return html.escape(s)
 
 def html_label(*lines):
     return "<" + "<br/>".join(lines) + ">"
@@ -100,10 +105,11 @@ def extract_info(pdf_path, raw_data):
             parts = []
             for v in id_entry:
                 val = _resolve(v)
-                if isinstance(val, (bytes, bytearray)) or type(val).__name__ == "ByteStringObject":
+                try:
                     parts.append(bytes(val).hex()[:8])
-                else:
-                    parts.append(str(val)[:8])
+                except Exception:
+                    s = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]', '', str(val))
+                    parts.append(s[:8])
             info["id_pair"] = tuple(parts[:2]) if len(parts) >= 2 else None
         except Exception:
             info["id_pair"] = None
