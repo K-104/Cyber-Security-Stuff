@@ -12,20 +12,29 @@ from Config import *
 
 MAX_DEPTH = 50
 
+# Keys that represent meaningful sections — the tree will print start/end
+# banners around each one so it is easy to find where a section begins and ends.
+SECTION_LABELS = {
+    "/Font":           "Font Definitions",
+    "/XObject":        "Embedded Images & Graphics",
+    "/Resources":      "Page Resources",
+    "/Pages":          "Page Tree",
+    "/Annots":         "Annotations",
+    "/AcroForm":       "Interactive Form Fields",
+    "/Metadata":       "Document Metadata Stream",
+    "/Info":           "Document Information",
+    "/ExtGState":      "Graphics State Parameters",
+    "/ColorSpace":     "Colour Spaces",
+    "/Contents":       "Page Content Streams",
+    "/Encrypt":        "Encryption Dictionary",
+    "/Outlines":       "Bookmarks / Document Outline",
+    "/StructTreeRoot": "Document Structure Tree",
+}
+
 
 # --- BACKGROUND LOGIC ---
 def object_description(obj: Any) -> str:
     return type(obj).__name__.replace("Object", "")
-
-
-def _is_binary(obj: Any) -> bool:
-    """
-    Returns True for anything that should be displayed as hex rather than decoded text.
-    ByteStringObject IS a bytes subclass, but calling str() on it decodes the raw
-    bytes using the platform encoding and produces garbled output (e.g. '\ub299\ud4c3').
-    Checking the class name catches that case regardless of MRO order.
-    """
-    return isinstance(obj, (bytes, bytearray)) or type(obj).__name__ == "ByteStringObject"
 
 
 def _is_binary(obj) -> bool:
@@ -118,7 +127,14 @@ def draw_tree(
         if not items:
             stats["leaves"] += 1
         for i, (key, value) in enumerate(items):
+            label = SECTION_LABELS.get(key)
+            if label:
+                pad = max(2, 62 - len(label))
+                output_file.write(f"\n{new_prefix}# ── {label} " + "─" * pad + " start\n")
             draw_tree(value, output_file, name=str(key), prefix=new_prefix, is_last=(i == len(items) - 1), visited=visited, depth=depth + 1, stats=stats)
+            if label:
+                pad = max(2, 62 - len(label))
+                output_file.write(f"{new_prefix}# ── {label} " + "─" * pad + " end\n\n")
         return
 
     if isinstance(obj, pypdf.generic.ArrayObject):
