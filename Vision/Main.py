@@ -17,8 +17,8 @@ ctk.set_appearance_mode("dark")
 TOOLS = [
     {"id": "tree",     "label": "ASCII Tree Generator",         "cls": TreeGeneratorModule},
     {"id": "diagram",  "label": "Visual Structure Map",         "cls": StructureDiagramModule},
-    {"id": "compare",  "label": "Structural Triage (Compare)",  "cls": PlaceholderModule},
-    {"id": "diff",     "label": "Forensics Auditor",            "cls": PlaceholderModule},
+    {"id": "compare",  "label": "Structural Triage (Compare)",  "cls": ForensicTriageModule},
+    {"id": "diff",     "label": "Forensics Auditor",            "cls": ForensicComparerModule},
     {"id": "creator",  "label": "Creator Detector",             "cls": CreatorDetectorModule},
     {"id": "extract",  "label": "Data Extractor",                "cls": DataExtractorModule},
 ]
