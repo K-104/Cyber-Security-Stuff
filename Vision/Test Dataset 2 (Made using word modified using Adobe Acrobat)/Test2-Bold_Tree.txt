@@ -32,17 +32,17 @@ top-to-bottom traces the document's structure: the catalog leads to the page tre
 hold the actual drawing instructions. Objects marked [Already Expanded] are
 cross-references seen earlier in the tree and are not repeated to prevent loops.
 
-└── /Root [Dictionary]   # 👉 The absolute starting point of the whole PDF file.
+└── /Root [Dictionary] 
     ├── /Lang: 'en' [TextString]
     ├── /MarkInfo [Dictionary] 
     │   └── /Marked: True [Boolean]
     ├── /Metadata [DecodedStream] (2,0)
     │   └── /Subtype: '/XML'
-    ├── /Pages [Dictionary] (12,0)  # 👉 The master folder that holds all the pages.
+    ├── /Pages [Dictionary] (12,0)
     │   ├── /Count: 1 [Number]
-    │   ├── /Kids [Array]  # 👉 The actual items inside a group.
+    │   ├── /Kids [Array]
     │   │   └── [0] [Dictionary] (16,0)
-    │   │       ├── /Contents [EncodedStream] (17,0)  # 👉 The actual text and drawing instructions.
+    │   │       ├── /Contents [EncodedStream] (17,0)
     │   │       │   └── /Filter: '/FlateDecode'
     │   │       ├── /CropBox [Array]
     │   │       │   ├── [0]: 0 [Number]
@@ -52,24 +52,24 @@ cross-references seen earlier in the tree and are not repeated to prevent loops.
     │   │       ├── /Group [Dictionary] 
     │   │       │   ├── /CS: '/DeviceRGB' [Name]
     │   │       │   ├── /S: '/Transparency' [Name]
-    │   │       │   └── /Type: '/Group' [Name]  # 👉 Tells us what this part of the file is.
-    │   │       ├── /MediaBox [Array]  # 👉 The physical paper size of the page.
+    │   │       │   └── /Type: '/Group' [Name]
+    │   │       ├── /MediaBox [Array]
     │   │       │   ├── [0]: 0 [Number]
     │   │       │   ├── [1]: 0 [Number]
     │   │       │   ├── [2]: 612 [Number]
     │   │       │   └── [3]: 792 [Number]
-    │   │       ├── /Resources [Dictionary]   # 👉 The extra files the page needs to draw itself.
-    │   │       │   ├── /ExtGState [Dictionary]   # 👉 Rules for drawing, like transparency.
+    │   │       ├── /Resources [Dictionary] 
+    │   │       │   ├── /ExtGState [Dictionary] 
     │   │       │   │   ├── /GS0 [Dictionary] (23,0)
     │   │       │   │   │   ├── /BM: '/Normal' [Name]
     │   │       │   │   │   ├── /CA: 1 [Number]
-    │   │       │   │   │   ├── /Type: '/ExtGState' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │   │   ├── /Type: '/ExtGState' [Name]
     │   │       │   │   │   └── /ca: 1 [Number]
     │   │       │   │   └── /GS1 [Dictionary] (24,0)
     │   │       │   │       ├── /BM: '/Normal' [Name]
     │   │       │   │       ├── /CA: 1 [Float]
     │   │       │   │       └── /ca: 1 [Float]
-    │   │       │   ├── /Font [Dictionary]   # 👉 The text styles used on this page.
+    │   │       │   ├── /Font [Dictionary] 
     │   │       │   │   ├── /C2_0 [Dictionary] (30,0)
     │   │       │   │   │   ├── /BaseFont: '/BCDEEE+TimesNewRomanPSMT' [Name]
     │   │       │   │   │   ├── /DescendantFonts [Array]
@@ -100,15 +100,15 @@ cross-references seen earlier in the tree and are not repeated to prevent loops.
     │   │       │   │   │   │       │   ├── /Leading: 42 [Number]
     │   │       │   │   │   │       │   ├── /MaxWidth: 2614 [Number]
     │   │       │   │   │   │       │   ├── /StemV: 40 [Number]
-    │   │       │   │   │   │       │   ├── /Type: '/FontDescriptor' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │   │   │       │   ├── /Type: '/FontDescriptor' [Name]
     │   │       │   │   │   │       │   └── /XHeight: 250 [Number]
     │   │       │   │   │   │       ├── /Subtype: '/CIDFontType2' [Name]
-    │   │       │   │   │   │       └── /Type: '/Font' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │   │   │       └── /Type: '/Font' [Name]
     │   │       │   │   │   ├── /Encoding: '/Identity-H' [Name]
     │   │       │   │   │   ├── /Subtype: '/Type0' [Name]
     │   │       │   │   │   ├── /ToUnicode [EncodedStream] (20,0)
     │   │       │   │   │   │   └── /Filter: '/FlateDecode'
-    │   │       │   │   │   └── /Type: '/Font' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │   │   └── /Type: '/Font' [Name]
     │   │       │   │   └── /TT0 [Dictionary] (33,0)
     │   │       │   │       ├── /BaseFont: '/BCDFEE+TimesNewRomanPSMT' [Name]
     │   │       │   │       ├── /Encoding: '/WinAnsiEncoding' [Name]
@@ -131,11 +131,11 @@ cross-references seen earlier in the tree and are not repeated to prevent loops.
     │   │       │   │       │   ├── /Leading: 42 [Number]
     │   │       │   │       │   ├── /MaxWidth: 2614 [Number]
     │   │       │   │       │   ├── /StemV: 40 [Number]
-    │   │       │   │       │   ├── /Type: '/FontDescriptor' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │       │   ├── /Type: '/FontDescriptor' [Name]
     │   │       │   │       │   └── /XHeight: 250 [Number]
     │   │       │   │       ├── /LastChar: 32 [Number]
     │   │       │   │       ├── /Subtype: '/TrueType' [Name]
-    │   │       │   │       ├── /Type: '/Font' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │       ├── /Type: '/Font' [Name]
     │   │       │   │       └── /Widths [Array]
     │   │       │   │           └── [0]: 250 [Number]
     │   │       │   └── /ProcSet [Array]
@@ -144,8 +144,8 @@ cross-references seen earlier in the tree and are not repeated to prevent loops.
     │   │       ├── /Rotate: 0 [Number]
     │   │       ├── /StructParents: 0 [Number]
     │   │       ├── /Tabs: '/S' [Name]
-    │   │       └── /Type: '/Page' [Name]  # 👉 Tells us what this part of the file is.
-    │   └── /Type: '/Pages' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       └── /Type: '/Page' [Name]
+    │   └── /Type: '/Pages' [Name]
     ├── /StructTreeRoot [Dictionary] (6,0)
     │   ├── /K [Array]
     │   │   └── [0] [Dictionary] (11,0)
@@ -156,10 +156,10 @@ cross-references seen earlier in the tree and are not repeated to prevent loops.
     │   │       │       ├── /P (11,0) [Already Expanded]
     │   │       │       ├── /Pg (16,0) [Already Expanded]
     │   │       │       ├── /S: '/P' [Name]
-    │   │       │       └── /Type: '/StructElem' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │       └── /Type: '/StructElem' [Name]
     │   │       ├── /P (6,0) [Already Expanded]
     │   │       ├── /S: '/Document' [Name]
-    │   │       └── /Type: '/StructElem' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       └── /Type: '/StructElem' [Name]
     │   ├── /ParentTree [Dictionary] (7,0)
     │   │   └── /Nums [Array]
     │   │       ├── [0]: 0 [Number]
@@ -186,8 +186,8 @@ cross-references seen earlier in the tree and are not repeated to prevent loops.
     │   │   ├── /Title: '/H1' [Name]
     │   │   ├── /Workbook: '/Document' [Name]
     │   │   └── /Worksheet: '/Part' [Name]
-    │   └── /Type: '/StructTreeRoot' [Name]  # 👉 Tells us what this part of the file is.
-    ├── /Type: '/Catalog' [Name]  # 👉 Tells us what this part of the file is.
+    │   └── /Type: '/StructTreeRoot' [Name]
+    ├── /Type: '/Catalog' [Name]
     └── /ViewerPreferences [Dictionary] (22,0)
         └── /DisplayDocTitle: True [Boolean]
 
