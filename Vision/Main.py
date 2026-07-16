@@ -63,8 +63,7 @@ class UltimatePDFSuite(ctk.CTk):
             btn.pack(fill="x", padx=10, pady=5)
             self.buttons[tool_id] = btn
 
-            self.modules[tool_id] = tool["cls"](self)
-            # --- THE FIX ---
+            # PlaceholderModule requires a title argument
             if tool["cls"] == PlaceholderModule:
                 self.modules[tool_id] = tool["cls"](self, title=tool["label"])
             else:
