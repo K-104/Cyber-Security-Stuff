@@ -18,22 +18,30 @@ def object_description(obj: Any) -> str:
     return type(obj).__name__.replace("Object", "")
 
 
+def _is_binary(obj: Any) -> bool:
+    """
+    Returns True for anything that should be displayed as hex rather than decoded text.
+    ByteStringObject IS a bytes subclass, but calling str() on it decodes the raw
+    bytes using the platform encoding and produces garbled output (e.g. '\ub299\ud4c3').
+    Checking the class name catches that case regardless of MRO order.
+    """
+    return isinstance(obj, (bytes, bytearray)) or type(obj).__name__ == "ByteStringObject"
+
+
 def format_leaf_value(obj: Any) -> str:
     """
-    Renders a leaf value for display. Byte-strings (like the trailer /ID pair,
-    or raw ByteStringObject values) are hex-encoded instead of using Python's
-    default repr(), which prints them as garbled, hard-to-read escape
-    sequences (e.g. b'\\xa1\\xb2...'). Everything else keeps its normal repr.
+    Renders a leaf value for display. Binary objects (ByteStringObject, bytes,
+    bytearray) are hex-encoded. Everything else keeps its normal repr().
     """
-    if isinstance(obj, (bytes, bytearray)):
-        return obj.hex()
+    if _is_binary(obj):
+        return bytes(obj).hex()
     return repr(obj)
 
 
 def format_metadata_value(value: Any) -> str:
-    """Same byte-safety as format_leaf_value, but unquoted -- cleaner for a table cell."""
-    if isinstance(value, (bytes, bytearray)):
-        return value.hex()
+    """Same binary-safety as format_leaf_value, but unquoted for table cells."""
+    if _is_binary(value):
+        return bytes(value).hex()
     return str(value)
 
 
@@ -205,6 +213,14 @@ def process_tree(pdf_path, txt_path, update_log, update_progress, finish_job):
             metadata_table = build_metadata_table(reader)
 
             out_file.write("=" * 80 + "\nPDF METADATA\n" + "=" * 80 + "\n\n")
+            out_file.write(
+                "This block contains the document's metadata — information embedded in the PDF\n"
+                "about the file itself rather than its visual content. Fields such as /Author,\n"
+                "/Creator, and /Producer reveal who wrote the document and which software saved\n"
+                "it. The /ID field is a pair of raw hex fingerprints that uniquely identify this\n"
+                "specific PDF instance; the first value is assigned when the file is created and\n"
+                "the second is updated every time the file is resaved.\n\n"
+            )
             out_file.write(metadata_table + "\n")
             update_log("\n" + metadata_table, TEXT_MAIN)
 
@@ -212,11 +228,28 @@ def process_tree(pdf_path, txt_path, update_log, update_progress, finish_job):
             update_progress(0.5)
 
             out_file.write("\n" + "=" * 80 + "\nPDF OBJECT TREE\n" + "=" * 80 + "\n\n")
+            out_file.write(
+                "This block maps the internal object graph of the PDF, starting from the document\n"
+                "root (/Root). Each indented node is a PDF object — dictionaries, arrays, streams,\n"
+                "or primitive values — connected by the references that link them together. Reading\n"
+                "top-to-bottom traces the document's structure: the catalog leads to the page tree\n"
+                "(/Pages), each page carries its /Resources (fonts, images), and /Contents streams\n"
+                "hold the actual drawing instructions. Objects marked [Already Expanded] are\n"
+                "cross-references seen earlier in the tree and are not repeated to prevent loops.\n\n"
+            )
             draw_tree(reader.trailer["/Root"], out_file, visited=visited, stats=stats)
 
             update_progress(0.8)
             summary_table = build_summary_table(stats, len(visited))
             out_file.write("\n" + "=" * 80 + "\nSUMMARY\n" + "=" * 80 + "\n\n")
+            out_file.write(
+                "This block provides a statistical overview of the object tree traversal above.\n"
+                "Nodes Mapped is the total count of every object visited during the walk.\n"
+                "Leaf Nodes are terminal values with no children — strings, numbers, booleans.\n"
+                "Max Depth shows the deepest nesting level reached in the object graph.\n"
+                "Unique Objects reflects how many distinct indirect references were resolved,\n"
+                "giving a sense of the PDF's overall complexity.\n\n"
+            )
             out_file.write(summary_table + "\n")
             update_log("\n" + summary_table, ACCENT_TEAL)
 

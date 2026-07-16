@@ -1,0 +1,212 @@
+================================================================================
+PDF METADATA
+================================================================================
+
+This block contains the document's metadata — information embedded in the PDF
+about the file itself rather than its visual content. Fields such as /Author,
+/Creator, and /Producer reveal who wrote the document and which software saved
+it. The /ID field is a pair of raw hex fingerprints that uniquely identify this
+specific PDF instance; the first value is assigned when the file is created and
+the second is updated every time the file is resaved.
+
+┌───────────────┬────────────────────────────────────────────────────┬───────────────────────────────────────────────────┐
+│ FIELD         │ VALUE                                              │ MEANING                                           │
+├───────────────┼────────────────────────────────────────────────────┼───────────────────────────────────────────────────┤
+│ /Author       │ Khaleel-Ali Quasem                                 │ -                                                 │
+│ /CreationDate │ D:20260707120406-05'00'                            │ -                                                 │
+│ /Creator      │ Microsoft® Word for Microsoft 365                  │ The app the human used to write the document.     │
+│ /ID           │ “ù½¸¡NH²fPÎÞÖ> / f83650095bb6ad4fac17a11cb164... │ -                                                 │
+│ /ModDate      │ D:20260707120453-05'00'                            │ -                                                 │
+│ /Producer     │ Microsoft® Word for Microsoft 365                  │ The software engine that actually saved the file. │
+└───────────────┴────────────────────────────────────────────────────┴───────────────────────────────────────────────────┘
+
+================================================================================
+PDF OBJECT TREE
+================================================================================
+
+This block maps the internal object graph of the PDF, starting from the document
+root (/Root). Each indented node is a PDF object — dictionaries, arrays, streams,
+or primitive values — connected by the references that link them together. Reading
+top-to-bottom traces the document's structure: the catalog leads to the page tree
+(/Pages), each page carries its /Resources (fonts, images), and /Contents streams
+hold the actual drawing instructions. Objects marked [Already Expanded] are
+cross-references seen earlier in the tree and are not repeated to prevent loops.
+
+└── /Root [Dictionary]   # 👉 The absolute starting point of the whole PDF file.
+    ├── /Lang: 'en' [TextString]
+    ├── /MarkInfo [Dictionary] 
+    │   └── /Marked: True [Boolean]
+    ├── /Metadata [DecodedStream] (2,0)
+    │   └── /Subtype: '/XML'
+    ├── /Pages [Dictionary] (12,0)  # 👉 The master folder that holds all the pages.
+    │   ├── /Count: 1 [Number]
+    │   ├── /Kids [Array]  # 👉 The actual items inside a group.
+    │   │   └── [0] [Dictionary] (16,0)
+    │   │       ├── /Contents [EncodedStream] (17,0)  # 👉 The actual text and drawing instructions.
+    │   │       │   └── /Filter: '/FlateDecode'
+    │   │       ├── /CropBox [Array]
+    │   │       │   ├── [0]: 0 [Number]
+    │   │       │   ├── [1]: 0 [Number]
+    │   │       │   ├── [2]: 612 [Number]
+    │   │       │   └── [3]: 792 [Number]
+    │   │       ├── /Group [Dictionary] 
+    │   │       │   ├── /CS: '/DeviceRGB' [Name]
+    │   │       │   ├── /S: '/Transparency' [Name]
+    │   │       │   └── /Type: '/Group' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       ├── /MediaBox [Array]  # 👉 The physical paper size of the page.
+    │   │       │   ├── [0]: 0 [Number]
+    │   │       │   ├── [1]: 0 [Number]
+    │   │       │   ├── [2]: 612 [Number]
+    │   │       │   └── [3]: 792 [Number]
+    │   │       ├── /Resources [Dictionary]   # 👉 The extra files the page needs to draw itself.
+    │   │       │   ├── /ExtGState [Dictionary]   # 👉 Rules for drawing, like transparency.
+    │   │       │   │   ├── /GS0 [Dictionary] (23,0)
+    │   │       │   │   │   ├── /BM: '/Normal' [Name]
+    │   │       │   │   │   ├── /CA: 1 [Number]
+    │   │       │   │   │   ├── /Type: '/ExtGState' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │   │   └── /ca: 1 [Number]
+    │   │       │   │   └── /GS1 [Dictionary] (24,0)
+    │   │       │   │       ├── /BM: '/Normal' [Name]
+    │   │       │   │       ├── /CA: 1 [Float]
+    │   │       │   │       └── /ca: 1 [Float]
+    │   │       │   ├── /Font [Dictionary]   # 👉 The text styles used on this page.
+    │   │       │   │   ├── /C2_0 [Dictionary] (30,0)
+    │   │       │   │   │   ├── /BaseFont: '/BCDEEE+TimesNewRomanPSMT' [Name]
+    │   │       │   │   │   ├── /DescendantFonts [Array]
+    │   │       │   │   │   │   └── [0] [Dictionary] (28,0)
+    │   │       │   │   │   │       ├── /BaseFont: '/BCDEEE+TimesNewRomanPSMT' [Name]
+    │   │       │   │   │   │       ├── /CIDSystemInfo [Dictionary] (25,0)
+    │   │       │   │   │   │       │   ├── /Ordering: 'Identity' [TextString]
+    │   │       │   │   │   │       │   ├── /Registry: 'Adobe' [TextString]
+    │   │       │   │   │   │       │   └── /Supplement: 0 [Number]
+    │   │       │   │   │   │       ├── /CIDToGIDMap: '/Identity' [Name]
+    │   │       │   │   │   │       ├── /DW: 1000 [Number]
+    │   │       │   │   │   │       ├── /FontDescriptor [Dictionary] (26,0)
+    │   │       │   │   │   │       │   ├── /Ascent: 891 [Number]
+    │   │       │   │   │   │       │   ├── /AvgWidth: 401 [Number]
+    │   │       │   │   │   │       │   ├── /CapHeight: 693 [Number]
+    │   │       │   │   │   │       │   ├── /Descent: -216 [Number]
+    │   │       │   │   │   │       │   ├── /Flags: 32 [Number]
+    │   │       │   │   │   │       │   ├── /FontBBox [Array]
+    │   │       │   │   │   │       │   │   ├── [0]: -568 [Number]
+    │   │       │   │   │   │       │   │   ├── [1]: -216 [Number]
+    │   │       │   │   │   │       │   │   ├── [2]: 2046 [Number]
+    │   │       │   │   │   │       │   │   └── [3]: 693 [Number]
+    │   │       │   │   │   │       │   ├── /FontFile2 [EncodedStream] (19,0)
+    │   │       │   │   │   │       │   │   └── /Filter: '/FlateDecode'
+    │   │       │   │   │   │       │   ├── /FontName: '/BCDEEE+TimesNewRomanPSMT' [Name]
+    │   │       │   │   │   │       │   ├── /FontWeight: 400 [Number]
+    │   │       │   │   │   │       │   ├── /ItalicAngle: 0 [Number]
+    │   │       │   │   │   │       │   ├── /Leading: 42 [Number]
+    │   │       │   │   │   │       │   ├── /MaxWidth: 2614 [Number]
+    │   │       │   │   │   │       │   ├── /StemV: 40 [Number]
+    │   │       │   │   │   │       │   ├── /Type: '/FontDescriptor' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │   │   │       │   └── /XHeight: 250 [Number]
+    │   │       │   │   │   │       ├── /Subtype: '/CIDFontType2' [Name]
+    │   │       │   │   │   │       └── /Type: '/Font' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │   │   ├── /Encoding: '/Identity-H' [Name]
+    │   │       │   │   │   ├── /Subtype: '/Type0' [Name]
+    │   │       │   │   │   ├── /ToUnicode [EncodedStream] (20,0)
+    │   │       │   │   │   │   └── /Filter: '/FlateDecode'
+    │   │       │   │   │   └── /Type: '/Font' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │   └── /TT0 [Dictionary] (33,0)
+    │   │       │   │       ├── /BaseFont: '/BCDFEE+TimesNewRomanPSMT' [Name]
+    │   │       │   │       ├── /Encoding: '/WinAnsiEncoding' [Name]
+    │   │       │   │       ├── /FirstChar: 32 [Number]
+    │   │       │   │       ├── /FontDescriptor [Dictionary] (31,0)
+    │   │       │   │       │   ├── /Ascent: 891 [Number]
+    │   │       │   │       │   ├── /AvgWidth: 401 [Number]
+    │   │       │   │       │   ├── /CapHeight: 693 [Number]
+    │   │       │   │       │   ├── /Descent: -216 [Number]
+    │   │       │   │       │   ├── /Flags: 32 [Number]
+    │   │       │   │       │   ├── /FontBBox [Array]
+    │   │       │   │       │   │   ├── [0]: -568 [Number]
+    │   │       │   │       │   │   ├── [1]: -216 [Number]
+    │   │       │   │       │   │   ├── [2]: 2046 [Number]
+    │   │       │   │       │   │   └── [3]: 693 [Number]
+    │   │       │   │       │   ├── /FontFile2 (19,0) [Already Expanded]
+    │   │       │   │       │   ├── /FontName: '/BCDFEE+TimesNewRomanPSMT' [Name]
+    │   │       │   │       │   ├── /FontWeight: 400 [Number]
+    │   │       │   │       │   ├── /ItalicAngle: 0 [Number]
+    │   │       │   │       │   ├── /Leading: 42 [Number]
+    │   │       │   │       │   ├── /MaxWidth: 2614 [Number]
+    │   │       │   │       │   ├── /StemV: 40 [Number]
+    │   │       │   │       │   ├── /Type: '/FontDescriptor' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │       │   └── /XHeight: 250 [Number]
+    │   │       │   │       ├── /LastChar: 32 [Number]
+    │   │       │   │       ├── /Subtype: '/TrueType' [Name]
+    │   │       │   │       ├── /Type: '/Font' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       │   │       └── /Widths [Array]
+    │   │       │   │           └── [0]: 250 [Number]
+    │   │       │   └── /ProcSet [Array]
+    │   │       │       ├── [0]: '/PDF' [Name]
+    │   │       │       └── [1]: '/Text' [Name]
+    │   │       ├── /Rotate: 0 [Number]
+    │   │       ├── /StructParents: 0 [Number]
+    │   │       ├── /Tabs: '/S' [Name]
+    │   │       └── /Type: '/Page' [Name]  # 👉 Tells us what this part of the file is.
+    │   └── /Type: '/Pages' [Name]  # 👉 Tells us what this part of the file is.
+    ├── /StructTreeRoot [Dictionary] (6,0)
+    │   ├── /K [Array]
+    │   │   └── [0] [Dictionary] (11,0)
+    │   │       ├── /K [Array]
+    │   │       │   └── [0] [Dictionary] (10,0)
+    │   │       │       ├── /K [Array]
+    │   │       │       │   └── [0]: 0 [Number]
+    │   │       │       ├── /P (11,0) [Already Expanded]
+    │   │       │       ├── /Pg (16,0) [Already Expanded]
+    │   │       │       ├── /S: '/P' [Name]
+    │   │       │       └── /Type: '/StructElem' [Name]  # 👉 Tells us what this part of the file is.
+    │   │       ├── /P (6,0) [Already Expanded]
+    │   │       ├── /S: '/Document' [Name]
+    │   │       └── /Type: '/StructElem' [Name]  # 👉 Tells us what this part of the file is.
+    │   ├── /ParentTree [Dictionary] (7,0)
+    │   │   └── /Nums [Array]
+    │   │       ├── [0]: 0 [Number]
+    │   │       └── [1] [Array]
+    │   │           └── [0] (10,0) [Already Expanded]
+    │   ├── /ParentTreeNextKey: 1 [Number]
+    │   ├── /RoleMap [Dictionary] (8,0)
+    │   │   ├── /Annotation: '/Sect' [Name]
+    │   │   ├── /Artifact: '/Sect' [Name]
+    │   │   ├── /Chart: '/Sect' [Name]
+    │   │   ├── /Chartsheet: '/Part' [Name]
+    │   │   ├── /CommentAnchor: '/Span' [Name]
+    │   │   ├── /Diagram: '/Figure' [Name]
+    │   │   ├── /Dialogsheet: '/Part' [Name]
+    │   │   ├── /Endnote: '/Note' [Name]
+    │   │   ├── /Footer: '/Sect' [Name]
+    │   │   ├── /Footnote: '/Note' [Name]
+    │   │   ├── /Header: '/Sect' [Name]
+    │   │   ├── /InlineShape: '/Sect' [Name]
+    │   │   ├── /Macrosheet: '/Part' [Name]
+    │   │   ├── /Notes: '/Sect' [Name]
+    │   │   ├── /Slide: '/Sect' [Name]
+    │   │   ├── /Textbox: '/Sect' [Name]
+    │   │   ├── /Title: '/H1' [Name]
+    │   │   ├── /Workbook: '/Document' [Name]
+    │   │   └── /Worksheet: '/Part' [Name]
+    │   └── /Type: '/StructTreeRoot' [Name]  # 👉 Tells us what this part of the file is.
+    ├── /Type: '/Catalog' [Name]  # 👉 Tells us what this part of the file is.
+    └── /ViewerPreferences [Dictionary] (22,0)
+        └── /DisplayDocTitle: True [Boolean]
+
+================================================================================
+SUMMARY
+================================================================================
+
+This block provides a statistical overview of the object tree traversal above.
+Nodes Mapped is the total count of every object visited during the walk.
+Leaf Nodes are terminal values with no children — strings, numbers, booleans.
+Max Depth shows the deepest nesting level reached in the object graph.
+Unique Objects reflects how many distinct indirect references were resolved,
+giving a sense of the PDF's overall complexity.
+
+┌────────────────┬───────┐
+│ METRIC         │ VALUE │
+├────────────────┼───────┤
+│ Nodes Mapped   │ 154   │
+│ Leaf Nodes     │ 115   │
+│ Max Depth      │ 11    │
+│ Unique Objects │ 23    │
+└────────────────┴───────┘
