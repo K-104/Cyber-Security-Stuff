@@ -366,7 +366,6 @@ def process_diagram(pdf_path, output_dir, update_log, update_progress, finish_jo
 
         try:
             graph.render(outpath, format="svg", cleanup=True)
-            graph.render(outpath, format="png", cleanup=True)
         except graphviz.backend.ExecutableNotFound:
             update_progress(0.0)
             update_log("\nERROR: Graphviz binary not found.", ACCENT_RED)
